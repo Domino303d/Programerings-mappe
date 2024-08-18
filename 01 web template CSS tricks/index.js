@@ -1,4 +1,4 @@
-let currentPage = 2
+let currentPage = 1
 let pages //array med alle elementer med class = page
 
 function setup(){
