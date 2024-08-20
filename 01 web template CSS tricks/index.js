@@ -1,5 +1,7 @@
-let currentPage = 1
+let currentPage = 3
 let pages //array med alle elementer med class = page
+let colors = ['red', 'purple', 'darkblue', 'gray', 'white', 'green', 'yellow']
+
 
 function setup(){
     console.log("okay buddy lets say that")
@@ -9,7 +11,13 @@ function setup(){
     //console.log(page.length)
 console.log(pages.length)
 
-
+//lav en masse div'er når vi kommer ind i page 3
+for(c of colors){
+    console.log(c)
+let div = createDiv()
+div.style("background-color", c)
+select('#page3').child(div)
+}
 }
 
 function shiftPage(num){
