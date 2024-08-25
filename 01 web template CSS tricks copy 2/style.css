@@ -1,0 +1,138 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+header{
+width: 100vw;
+height: 12vh;
+position: fixed;
+z-index: 2;
+background-color: black;
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+
+}
+
+header#leftmenu{
+    width: 20vw;
+    height: 100vh;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(2);
+    background-color: rgb(34, 29, 29);
+
+}
+
+.menuitem{
+    width: 100%;
+    height: 100%;
+font-size: 2rem;
+display: grid;
+place-items: center;
+border-right:1px solid black;
+transition: 0.3s all ease-in-out;
+}
+
+.menuitem:hover{
+border-bottom:6px solid darkblue;
+border-top:6px solid darkblue;
+
+font-size: 2.4rem;
+
+}
+.menuitem.active{
+border-bottom: 6px solid yellow;
+border-top: 6px solid yellow ;
+}
+
+.page{
+position:fixed;
+    left:-100vw;
+    top:0;
+    width: 80vw;
+    height: 100vh;
+    margin-left: 20vw;
+    overflow:hidden;
+    display:grid;
+    place-items:center;
+    transition: 0.3s .3s all ease-in-out
+}
+
+
+
+.visible{
+    left:0;
+}
+
+.box{
+width: 100%;
+height: 100vh;
+display: grid;
+place-items: center;
+position: relative;
+}
+
+#image{
+    background-image: url(./assets/waifu.jpg);
+    width: 40vw;
+    height: 100vh;
+    background-size: cover;
+}
+
+#rightimage{
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-image: url(./assets/ryo\ grass.jpg);
+
+}
+
+h2{
+    color: darkblue;
+    text-align: center;
+}
+
+
+#grass{
+    height: 50vh;
+    width: 50%;
+    background-size: cover;
+    background-image: url(./assets/grass.gif);
+}
+
+.textleft{
+    grid-template-columns: 1fr 1fr;
+    color: darkblue;
+    
+}
+
+#page1{
+    background-color: black;
+}
+
+#page2{
+background-color: black;
+}
+
+#page3{
+    background-color: black;
+    
+
+}
+
+#page3 div{
+    width: 100%;
+    height: 100%;
+}
+
+
+ #page4{
+        background-color: rgb(0, 0, 0);
+        }
+
+h1{
+    font-family: Raleway;
+color:darkblue;
+
+}
