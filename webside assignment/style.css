@@ -117,7 +117,7 @@ position: relative;
 }
 
 #rightimage{
-    height: 100vh;
+    height: 80vh;
     width: 50vw;
     background-size: cover;
     background-image: url(./assets/ryo\ grass.jpg);
