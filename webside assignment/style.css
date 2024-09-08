@@ -9,7 +9,7 @@ width: 100vw;
 height: 12vh;
 position: fixed;
 z-index: 2;
-background-color: black;
+background-color: rgb(31, 31, 31);
 display: grid;
 grid-template-columns: repeat(4, 1fr);
 
@@ -87,7 +87,6 @@ header.hidden:hover .menuitem{
   height:100vh;
   margin-left:20vw;
   top:0vh;
-  overflow: hidden;
   display:grid;
   place-items: center;
   transition: 0.3s 0.3s all ease-in-out;
