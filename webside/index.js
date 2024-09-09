@@ -64,3 +64,25 @@ function keyPressed(){
     console.log(key)
     shiftPage(key)
 }
+
+
+
+    //Først kalder vi server API'ets endpoint
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+
+    //så venter vi på serverens promise, der kommer tilbage med .then()
+    .then(
+        function(response){
+            //lad os tjekke om serverens response er okay
+            console.log(response)
+            //og hvis det er det, beder vi serveren om at give os json resultatet 
+            return response.json()
+        }
+    )
+    //og når DET så komer tilbage 
+    .then(
+        function (data){
+            //vi har nu en random drink
+            console.log(data)
+        }
+    )
