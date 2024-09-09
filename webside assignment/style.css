@@ -131,7 +131,7 @@ h2{
 
 #grass{
     height: 50vh;
-    width: 50%;
+    width: 40vw;
     background-size: cover;
     background-image: url(./assets/grass.gif);
 }
