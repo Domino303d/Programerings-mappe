@@ -1,0 +1,9 @@
+{
+    "Name" : "Baibua",
+    "Description" : "Dette er data fra den lokale fil, mydata.json. de lægger i JavaScript Object Notation (JSON), og er hentet med en funktion fetch skipidi",
+    "Flowers" : ["Rose", "lotus", "maple"],
+    "alive": true,
+    "image" : "./assets/cat.png"
+
+
+}

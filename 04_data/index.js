@@ -1,4 +1,4 @@
-let currentPage = 1
+let currentPage = 2
 
 let pages //array med alle elementer med class = page 
 let menuItems //array med alle menupunkterne  
@@ -8,11 +8,13 @@ function setup(){
 }
 
 function setupMenuStructure(){
+    //pages er et array, hvor vi lægger vores page items
     pages = selectAll('.page')
     menuItems = selectAll('.menuitem')
 
     //menu items skal reagere ved at skifte side
-    for( m of menuItems ){
+    // lave en loop med variable m, hver gang loop kører, er m lige med 1 indtil der ikke mere.     for( m of menuItems ){
+        //når man trykker på en div kalde vi på den mousepress, og laver en function.
         m.mousePressed( function(e) {
             //e.target er selve html div'en 
             console.log(e.target.id)
@@ -32,8 +34,51 @@ function setupMenuStructure(){
 
 }
 
+
+function pageOne(){
+    console.log('side 1 funktionen kaldes')
+
+}
+
 function pageTwo(){
 
+    //Først beder vi fetch hente den lokae fil
+    fetch('./mydata.json')
+
+    //så venter vi på kaldets promise, der kommer tilbage med .then()
+    .then(
+        function(response){
+            //lad os tjekke om serverens response er okay
+            console.log(response)
+            //og hvis det er det, beder vi serveren om at give os json resultatet 
+            return response.json()
+        }
+    )
+    
+    //og når DET så komer tilbage 
+    .then(
+        function (data){
+            //vi har nu en random drink
+            console.log(data.Name)
+            //p5 funktion der laver en ny div
+            let newDiv = createElement('div')
+            let newHeader = createElement('h1', data.Name)
+            let newP = createElement('h1', data.Description)
+            newDiv.child(newHeader)
+            newDiv.child(newP)
+
+            select('#localData').child(newDiv)
+
+
+
+
+        }
+    )
+}
+
+
+
+function pageThree(){    
     //Først kalder vi server API'ets endpoint
     fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
 
@@ -54,10 +99,10 @@ function pageTwo(){
             console.log(data)
         }
     )
+
 }
 
-function pageThree(){
-}
+
 
 function pageFour(){
 }
@@ -80,12 +125,22 @@ function shiftPage(num){
     select("#page" + currentPage).addClass('visible')
     select("#menu" + currentPage).addClass('active')
 
+    
+    if(currentPage == 1) {
+        pageOne()
+    }
+
     if(currentPage == 2) {
         pageTwo()
     }
     if(currentPage == 3) {
         pageThree()
     }
+
+    if(currentPage == 4) {
+        pageFour()
+    }
+
 }
 
 function keyPressed(){
