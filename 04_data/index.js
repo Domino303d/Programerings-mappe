@@ -13,7 +13,8 @@ function setupMenuStructure(){
     menuItems = selectAll('.menuitem')
 
     //menu items skal reagere ved at skifte side
-    // lave en loop med variable m, hver gang loop kører, er m lige med 1 indtil der ikke mere.     for( m of menuItems ){
+    // lave en loop med variable m, hver gang loop kører, er m lige med 1 indtil der ikke mere.     
+    for( m of menuItems ){
         //når man trykker på en div kalde vi på den mousepress, og laver en function.
         m.mousePressed( function(e) {
             //e.target er selve html div'en 
@@ -62,11 +63,32 @@ function pageTwo(){
             console.log(data.Name)
             //p5 funktion der laver en ny div
             let newDiv = createElement('div')
+            //laver en ny overskrift
             let newHeader = createElement('h1', data.Name)
-            let newP = createElement('h1', data.Description)
+            //laver en p-element
+            let newP = createElement('p', data.Description)
+//nu laver vi en underoverskrift
+          let FlowerHeader = createElement('h3', 'Flower colors')
+        //nu skal jeg løbe et array igennem fra JSON
+        let flowerlist = createElement('ul')
+        //for hver farve inden i Flowers gør noget inden i et loop hvergang
+        for(color of data.Flowers){
+            //console.log(color)
+        console.log(color)
+        let listItem = createElement('li', color)
+        flowerlist.child(listItem)
+        }
+
+            //til sidst lægger vi de nye elementer ind i den div vi oprettede
             newDiv.child(newHeader)
             newDiv.child(newP)
+            newDiv.child(FlowerHeader)
+            newDiv.child(flowerlist)
 
+            //tag fat i html elementet med id = localData
+            //tøm det
+            select('#localData').html(" ")
+            //og sæt data ind i det
             select('#localData').child(newDiv)
 
 
