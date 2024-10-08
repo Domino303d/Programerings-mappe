@@ -1,6 +1,6 @@
 function setup(){
    // hentTopPosts("okZyox");
-    // Kalder funktionen 'hentTopPosts' med argumentet "cats" ved programmets start.
+    // Kalder funktionen 'hentTopPosts' med argumentet "okZyox" ved programmets start.
     select('#searchButton').mousePressed(function(){
         subreddit = select('#searchInput').value()
         hentTopPosts( subreddit )
@@ -16,9 +16,9 @@ select('#page1 .right').html('')
         //det tag noget tid derfor keyworded er "await"
         try{
        const response = await fetch(`https://www.reddit.com/r/${subreddit}/top.json?limit=8`)
-        //når vi så får det oject tilage og HVIS response er ok = true
-        //så kan vi bruge metoden .json() til at læse en readable stream
-        //dn operation tag også noget tid - derfor keywordet "await" IGEN
+        //når vi så får det objekt tilage og HVIS response.ok = true
+        //så kan vi bruge metoden .json() til at læse en readable stream og kovert den til en json format.
+        //den operation tag også noget tid - derfor keywordet "await" IGEN
 
         const json = await response.json();
         //og så kan vi bruge DATAfra serveren i json format

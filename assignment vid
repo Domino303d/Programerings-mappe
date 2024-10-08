@@ -1,0 +1,63 @@
+function setup(){
+    hentTopPosts("denmark");
+    // Kalder funktionen 'hentTopPosts' med argumentet "denmark" ved programmets start.
+    //som betyder at det første den gør er at sætte funktionen op
+}
+
+//async betyder at funktionen kan vente på at ting er færdige - fx at hente data som tag noget tid
+async function hentTopPosts(subreddit) {
+
+    //først sætter vi et repsonse objekt lig metoden fetch som henter data fra Reddit APT'et
+    //det tager noget tid, derfor keywordet "await", som venter på at fetch anmodning er færdig
+    const response = await fetch(`https://www.reddit.com/r/${subreddit}/top.json?limit=8`)
+
+
+        //når vi så får det objekt tilbage, og HVIS repsonse.ok = true
+        //så kan vi bruge metoden .json() til at læse en readable stream og kovert den til en json format.
+        //den operation tager OGSÅ noget tid - derfor bruger vi keywordet "await" igen 
+        const json = await response.json()
+
+            //og SÅ kan vi bruge data fra serveren i json format, vi konsol logger for at se hvad vi henter
+            console.log(json.data.children)
+
+            //posts er et array med poster fra json objektet
+            //det er et array pga. posts indenholder data som vi har hentet
+                 let posts = json.data.children
+            
+
+            //vi løber arrayet med poster igennem med et loop, som kører og tjekker
+            for( p of posts ){
+               
+                //og nu kan vi logge de forskellige egenskaber ved hvert post til konsollen 
+                //så vi kan se de dater vi vil have i console, for at se om vi har hentet noget
+                console.log(p.data.title)
+                console.log(p.data.url)
+                console.log(p.data.ups)
+                console.log(p.data.thumbnail)
+                console.log(p.data.author)
+
+                //kalder vores funktion for at vise det vi har hentet
+                //og lægge dem ind på siden/html
+                createPost(p.data)
+            }
+        }
+        
+        //laver en function
+function createPost(post){
+    //vi laver først en reference til det HTML element hvor vi vil sætte posterne ind i 
+    //altså hvor vi vil lægge vores post ind henne, som er i "page1" ID og ".right" klassen
+    let rightDiv = select('#page1 .right')
+
+    //giver posten en container
+    let container = createDiv().addClass('post')
+
+    //her giver vi posten en titel
+    let title = createElement('h1', post.title)
+    
+    //hver gang man har lavet et element, skal det ind i containeren
+    container.child(title)
+
+    //det lægger alt det der er i vores container ind i vores rightDiv, på vores side
+    rightDiv.child(container)
+}   
+
