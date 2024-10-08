@@ -28,11 +28,6 @@ async function hentTopPosts(subreddit) {
         // Ekstraherer arrayet af indlæg fra den modtagne data.
 
         for (const post of posts) {
-            console.log(post.title_)
-            console.log(post.rank)
-            console.log(post.url)
-            console.log(post.images.jpg.image_url)
-          
 
             
             createPost(post);
