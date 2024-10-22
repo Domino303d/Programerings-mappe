@@ -1,0 +1,81 @@
+
+//variabler til at indsætte i HTML 
+let m5NameDiv, m5StatusDiv
+
+//denne variabel bruges til at håndtere mqtt
+let client 
+
+function setup() {
+  //tag fat i de 2 HTML elementer vi vil modificere 
+
+  //vi selecter ID'en m5_1 og vælger dens header, som er vores navn
+  m5NameDiv = select('#m5_1 header')
+  //vi selecter ID'en m5_1 og vælger klassen status
+  m5StatusDiv = select('#m5_1 .status')
+
+  //vi kan bruge mqtt.connect fordi vi har inkluderet mqtt.js i HTML filen
+  //hvilket gør at vi kan oprette forbindelse til MQTT serveren
+  client = mqtt.connect('wss://mqtt.nextservices.dk')
+
+
+  //on er en asynkron EVENT (stor bogstaver pga. det er et event baseret kode)
+  //som kaldes når vi får en besked fra mqtt serveren
+
+  //her siger vi at hvis vi har oprettet forbindelse til vores MQTT server,
+  //skal den kalde "function(svar)", "svar" er de informationer vi får fra serveren
+  client.on('connect', function(svar){
+
+    //her console logger vi 'svar' for at se hvad vi har med en besked.
+    console.log(svar, 'serveren er klar til mqtt kommunikation')
+  })
+
+  //nu vil vi gerne subscribe på et emne vha. subscribe funktionen
+  //så vi kan få beskeder fra dem som har abonneret til samme emne
+  client.subscribe('programmering') 
+
+
+
+  //og så skal vi sætte den LISTENER op som skal modtage input fra MQTT
+  //jeg har dog glemt hvad LISTENER var, men hvis man oversætter det til dansk
+  // vil jeg sige at den hører eller lyter efter beskeder fra serveren
+  client.on('message', function(emne, besked){
+
+  //function(emne, besked) henter emnet og beskeder som er sendt til vores emne,
+  //når den modtager en besked
+
+
+    //emnet kommer som en string (altså en text) så den kan vi bare console.log
+    console.log(emne)
+
+    //beskeden skal vi lige parse før vi kan læse den, altså gør den til en string
+    //vi bruger .toString() for at kovert beskeden til en string så vi kan læse det
+    console.log(besked.toString())
+
+
+    //det vi får fra m5'eren er i det her eksempel JSON format 
+    //så vi gører vores besked til et JSON objekt, som vi kan bruge vha. JSON.parse()
+    let json = JSON.parse(besked.toString())
+
+    //nu kan jeg bruge data fra JSON objektet,
+    //så vi console logger navnet fra JSON objektet
+    console.log(json.name, 'her er navnet fra JSON objektet')
+
+    //SÅ kan vi opdatere HTML dokumentet med de nye værdier vi har hentet
+
+    //opdater navnet i HTML'et
+    m5NameDiv.html(json.name)
+    //opdater status i HTML'et
+    m5StatusDiv.html(json.status)
+
+
+    //HVIS status er true, skal vi give klassen "true"
+    //vha. betingelsesmetoden
+    if(json.status){
+        //hvis den er true så add klassen true til status
+      m5StatusDiv.addClass("true")
+    }else{
+        //ellers hvis den er false så fjern klassen true
+      m5StatusDiv.removeClass("true")
+    }
+  })
+}

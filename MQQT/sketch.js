@@ -1,3 +1,5 @@
+
+//variabler til at indsætte i HTML 
 let m5NameDiv, m5StatusDiv
 //denne variable bruges til at håndterer mqtt
 let client
@@ -31,9 +33,9 @@ client.on('message', function(emne, besked){
   //så kan vi opdater HTML dokumentet
   m5NameDiv.html(json.name)
   m5StatusDiv.html(json.status)
-  //
-  if(json.status){
-    m5StatusDiv.addClass(json.status)
+    //HVIS status er true, skal vi give klassen "true"
+    if(json.status){
+    m5StatusDiv.addClass("true")
   }else{
     m5m5StatusDiv.removeClass("true")
   }
